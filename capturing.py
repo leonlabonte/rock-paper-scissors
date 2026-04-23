@@ -10,9 +10,9 @@ mid_width = width // 2
 mid_height = height // 2
 new_h_w = 256
 
-print('Press r to start/end capturing rock-pictures')
-print('Press p to start/end capturing paper-pictures')
-print('Press s to start/end capturing scissors-pictures')
+print('Press r to capture a rock picture')
+print('Press p to capture a paper picture')
+print('Press s to capture a scissors picture')
 print('Press q to quit')
 
 r_idx = 0
@@ -26,23 +26,42 @@ while True:
     if not ret:
         break
 
-    # crop frame
+    # crop frame to 256x256 px
     frame = frame[mid_height-new_h_w//2:mid_height+new_h_w//2,
                   mid_width-new_h_w//2:mid_width+new_h_w//2]
 
-    # rock
-    if cv2.waitKey(1) & 0xFF == ord('r'):
-            cv2.imshow('frame', frame)
-            cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            cv2.imwrite(f'data/rock_{r_idx}.jpg', frame)
-            r_idx += 1
-    
-    # elif cv2.waitKey(1) & 0xFF == ord('p'):
-    #     cv2.imwrite('data/paper.jpg', frame)
-    # elif cv2.waitKey(1) & 0xFF == ord('s'):
-    #     cv2.imwrite('data/scissors.jpg', frame)
-
     cv2.imshow('frame', frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # rock
+    if cv2.waitKey(1) & 0xFF == ord('r'):
+            # cv2.imshow('frame', frame)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(f'data/rock_{r_idx}.jpg', gray)
+            print(f'rock_{r_idx}.jpg saved')
+            r_idx += 1
+    
+    # paper
+    elif cv2.waitKey(1) & 0xFF == ord('p'):
+            # cv2.imshow('frame', frame)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(f'data/paper_{p_idx}.jpg', gray)
+            print(f'paper_{p_idx}.jpg saved')
+            p_idx += 1
+    
+    # scissors
+    elif cv2.waitKey(1) & 0xFF == ord('s'):
+            # cv2.imshow('frame', frame)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(f'data/scissors_{s_idx}.jpg', gray)
+            print(f'scissors_{s_idx}.jpg saved')
+            s_idx += 1
+
+    # quit
+    elif cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+    else:
+        continue
+
+cap.release()
+cv2.destroyAllWindows()

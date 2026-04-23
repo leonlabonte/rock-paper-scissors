@@ -3,7 +3,10 @@ For limitation, the software should only detect, if the given gesture is either:
 
 Here is my diary:
 
-day 1
+Day 1
 - setup the git repository and virtual environment 
 - start programming a module for capturing images directly from the webcam
-- the images get labeled (rock, paper, scissors) and later used for training and testing
+- the images get labeled (rock, paper, scissors) and saved as jpg for later training
+
+Day 2
+- ...
